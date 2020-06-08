@@ -8,6 +8,10 @@
     "employees": {
       "path": "/employees",
       "public": true
+    },
+    "employee": {
+      "path": "/employee/:id",
+      "public": true
     }
   }
 }

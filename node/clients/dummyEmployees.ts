@@ -10,4 +10,10 @@ export default class DummyEmployees extends ExternalClient {
       metric: 'dummyEmployees-employees',
     })
   }
+
+  public async getEmployee (id: number): Promise<any> {
+    return this.http.get(`/employee/${id}`, {
+      metric: 'dummyEmployees-employee',
+    })
+  }
 }

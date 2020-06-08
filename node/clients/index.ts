@@ -7,4 +7,8 @@ export class Clients extends IOClients {
   public get dummyEmployees() {
     return this.getOrSet('employees', DummyEmployees)
   }
+
+  public get dummyEmployee() {
+    return this.getOrSet('employee', DummyEmployees)
+  }
 }
