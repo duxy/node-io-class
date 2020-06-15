@@ -20,6 +20,9 @@
         "host": "dummy.restapiexample.com",
         "path": "/api/v1/*"
       }
+    },
+    {
+      "name": "vbase-read-write"
     }
   ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"

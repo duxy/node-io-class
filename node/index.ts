@@ -1,10 +1,10 @@
-import { ClientsConfig, LRUCache, Service, ParamsContext, ServiceContext } from '@vtex/api'
+import { ClientsConfig, LRUCache, Service, ParamsContext, ServiceContext, RecorderState } from '@vtex/api'
 
 import { Clients } from './clients'
 import { employees } from './middlewares/employees'
 import { employee } from './middlewares/employee'
 import { validate } from './middlewares/validate'
-const TIMEOUT_MS = 800
+const TIMEOUT_MS = 4000
 
 // Create a LRU memory cache for the Status client.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
@@ -20,9 +20,8 @@ const clients: ClientsConfig<Clients> = {
     default: {
       retries: 2,
       timeout: TIMEOUT_MS,
-      // API needs theese kind of cookies for ohter calls than employees...
-      headers: {'Cookie': 'active_template::133674=pub_site.1591590864; ezoab_133674=mod27; ezoadgid_133674=-1; ezoref_133674=restapiexample.com; PHPSESSID=1973d6c5a0329edb201e015cd74715b7'}
     },
+
     // This key will be merged with the default options and add this cache to our Status client.
     employees: {
       memoryCache,
@@ -42,10 +41,8 @@ declare global {
   type Context = ServiceContext<Clients, State>
 
   // The shape of our State object found in `ctx.state`. This is used as state bag to communicate between middlewares.
-  interface State {
+  interface State extends RecorderState {
     id: number,
-    recorder: any,
-    body: any
   }
 }
 

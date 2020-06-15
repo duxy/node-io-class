@@ -7,7 +7,6 @@ export async function validate(ctx: Context, next: () => Promise<any>) {
     },
   } = ctx
 
-  console.log('Received params:', params)
 
   const { id } = params
 
