@@ -1,6 +1,6 @@
-import { UserInputError } from '@vtex/api'
+import { EmployeeContext } from '../typings/employeesContext'
 
-export async function validate(ctx: Context, next: () => Promise<any>) {
+export async function validate(ctx: EmployeeContext, next: () => Promise<any>) {
   const {
     vtex: {
       route: { params },
@@ -10,14 +10,13 @@ export async function validate(ctx: Context, next: () => Promise<any>) {
 
   const { id } = params
 
-  if (!id) {
-    throw new UserInputError('Id is required') // Wrapper for a Bad Request (400) HTTP Error. Check others in https://github.com/vtex/node-vtex-api/blob/fd6139349de4e68825b1074f1959dd8d0c8f4d5b/src/errors/index.ts
-  }
-
+ try {
   const idNumber = parseInt(id as string, 10)
-
-
   ctx.state.id = idNumber
-
   await next()
+ } catch(e) { 
+   console.log(e)
+   return
+ }
+
 }
